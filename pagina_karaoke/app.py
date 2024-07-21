@@ -1,14 +1,15 @@
 from flask import Flask, request, jsonify, send_from_directory
 import mysql.connector
+import os
 
 app = Flask(__name__)
 
 # Configurações de conexão com o MySQL
 db_config = {
-    'user': 'root',
-    'password': 'fnlj1984',
-    'host': 'localhost',
-    'database': 'meus_dados'
+    'user': os.environ.get('DB_USER'),
+    'password': os.environ.get('DB_PASSWORD'),
+    'host': os.environ.get('DB_HOST'),
+    'database': os.environ.get('DB_NAME')
 }
 
 @app.route('/')
@@ -38,3 +39,4 @@ def search():
 
 if __name__ == '__main__':
     app.run(debug=True)
+
